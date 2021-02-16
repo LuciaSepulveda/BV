@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@sass-collective/sass-box-sizing": "^1.1.0",
+    "compass": "^0.1.1"
+  }
+}
