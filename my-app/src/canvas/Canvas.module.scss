@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Overpass+Mono:600');
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+.container {
+  background-color: hsl(210, 5%, 12%);
+  width:100vmin;
+  align-items: center;
+  margin:auto;
+  height:100%;
+}
+svg {
+  margin: auto;
+  width: 100vmin;
+}
+
+
+g > text {
+  text-anchor: middle;
+  font-size: 20px;
+  font-family: Overpass Mono, monospace;
+  fill: hsl(210, 100%, 75%);
+  opacity: 0;
+  animation-name: opac;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+g > text:nth-child(1) { animation-delay: 0s; }
+
+@keyframes opac {
+  0% { opacity: 0; }
+  25% { opacity: 1; }
+  55% { opacity: 1; }
+  75% {opacity:0; }
+  100% { opacity: 0; }
+}
+
+
+
