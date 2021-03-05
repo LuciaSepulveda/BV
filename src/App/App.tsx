@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { useState } from 'react'
-import logo from '../logo.svg'
+import {useState} from 'react'
 import styles from './App.module.scss'
 import QuestionCard from '../components/QuestionCard/QuestionCard'
 import Button from '../ui/Button/Button'
@@ -11,8 +10,8 @@ import IncorrectAnswer from '../pages/IncorrectAnswer/IncorrectAnswer'
 import SelectCategory from '../pages/SelectCategory/SelectCategory'
 import {Question} from '../components/Question'
 import api from '../components/api'
-import correct from '../assets/correct.svg'
-import incorrect from '../assets/incorrect.svg'
+import correct from '../assets/correct.png'
+import incorrect from '../assets/incorrect.png'
 import {htmlDecode} from '../decode/htmlDecode'
 import Canvas from '../canvas/Canvas'
 
@@ -60,27 +59,14 @@ const App: React.FC = () => {
 
   const question:Question = questions[currentQuestion];
 
- 
-
-
-
   React.useEffect(() => {
 
     if (gameStatus !== GameStatus.Init)
     {
       return;
     }
-    /*
-    setStatus(Status.Pending);
-    
-    api.list(Category.Sports).then( (question) => {
-      setQuestions(question);
-      setStatus(Status.Resolved);
-    })*/
+
   },[gameStatus])
-
-
-
 
   React.useEffect( () => {
     if (!start) {return}
@@ -95,8 +81,6 @@ const App: React.FC = () => {
 
     return () => clearInterval(interval);
   }, [time,start])
-
-
 
   React.useEffect( () => {
     if (time <= 3 && answerUser === question.correct_answer)
@@ -125,7 +109,6 @@ const App: React.FC = () => {
       setGameStatus(GameStatus.Finish);
     }
   }
-
 
   const onAnswer = (text:string) =>
   {
@@ -156,8 +139,6 @@ const App: React.FC = () => {
       console.log("Se configuro la api")
     })
   }
-
-
 
   const selectCategory = (text: string) => {
     let n:number;
@@ -230,14 +211,6 @@ const App: React.FC = () => {
   if (gameStatus === GameStatus.Playing && electionCategory === false)
   {
     return(
-      /*
-      <StartPage
-        startGame={ () => {
-          setGameStatus(GameStatus.Playing);
-          setStart(true);
-        }}
-      />
-      */
      <SelectCategory> 
       <Button onClick={()=> {selectCategory('sports')}}>Sports</Button>
       <Button onClick={()=> {selectCategory('geography')}}>Geography</Button>
@@ -297,9 +270,5 @@ const App: React.FC = () => {
     </div>
   )
 }
-
-/*
-        <progress max="100" value="0"></progress>
-        */
 
 export default App
