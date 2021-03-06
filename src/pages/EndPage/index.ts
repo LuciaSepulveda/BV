@@ -1,1 +1,1 @@
-export {default} from './EndPage'
+export {default} from "./EndPage"

@@ -1,6 +1,6 @@
-import * as React from 'react'
-import Button from '../../ui/Button/Button'
-import styles from './SelectCategory.module.scss'
+import * as React from "react"
+import Button from "../../ui/Button/Button"
+import styles from "./SelectCategory.module.scss"
 /*
 const SelectCategory: React.FC = () =>
 {
@@ -27,18 +27,14 @@ interface Props {
 }
 */
 
+const SelectCategory: React.FC = ({children}) => {
+  const [category, setCategory] = React.useState<string>("hola")
 
-const SelectCategory: React.FC = ({children}) =>
-{
+  function returnCategory() {
+    return category
+  }
 
-    
-    const [category,setCategory] = React.useState<string>('hola')
-
-    function returnCategory()
-    {
-        return category
-    }
-    /*
+  /*
     return(
         <div className={styles.container}>
             <h2>Select Category</h2>
@@ -53,19 +49,12 @@ const SelectCategory: React.FC = ({children}) =>
         </div>
     )
     */
-   return(
-   <div className={styles.container}>
-       <h2>Select category</h2>
-       <div className={styles.grid_container}>
-       {children}
-       </div>
+  return (
+    <div className={styles.container}>
+      <h2>Select category</h2>
+      <div className={styles.grid_container}>{children}</div>
     </div>
-   )
+  )
 }
 
-
-
 export default SelectCategory
-
-
-

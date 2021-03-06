@@ -1,1 +1,1 @@
-export {default} from './SelectCategory'
+export {default} from "./SelectCategory"
