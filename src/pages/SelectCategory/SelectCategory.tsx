@@ -1,45 +1,23 @@
-import {Box, Center, Flex, Grid, Text, Button} from "@chakra-ui/react"
+import {Flex, Grid, Text, Button} from "@chakra-ui/react"
 import * as React from "react"
 
 interface Props {
   selectCategory: (cat: string) => void
 }
 
-const SelectCategory: React.FC<Props> = ({selectCategory, children}) => {
-  const [category, setCategory] = React.useState<string>("hola")
-
-  /*
-    return(
-        <div className={styles.container}>
-            <h2>Select Category</h2>
-            <div className={styles.grid_container}>
-              <Button onClick={()=> {start(); setCategory('sports')}}>Sports</Button>
-              <Button onClick={()=> {start(); setCategory('geography')}}>Geography</Button>
-              <Button onClick={()=> {start(); setCategory('history')}}>History</Button>
-              <Button onClick={()=> {start(); setCategory('animals')}}>Animals</Button>
-              <Button onClick={()=> {start(); setCategory('music')}}>Music</Button>
-              <Button onClick={()=> {start(); setCategory('general')}}>General</Button>
-            </div>
-        </div>
-    )
-    */
+const SelectCategory: React.FC<Props> = ({selectCategory}) => {
   return (
-    /*
-    <div className={styles.container}>
-      <h2>Select category</h2>
-      <div className={styles.grid_container}>{children}</div>
-    </div>*/
     <Flex
+      _hover={{bg: "brand.600"}}
       bg="brand.500"
       direction="column"
       h="700px"
       justify="center"
       m="auto"
-      w="480px"
-      _hover={{bg: "brand.600"}}
       transition="1s cubic-bezier(.08,.5,.5,1)"
+      w="480px"
     >
-      <Text color="white" fontSize="4xl" p={8} fontWeight="bold">
+      <Text color="white" fontSize="4xl" fontWeight="bold" p={8}>
         Select category
       </Text>
       <Grid gap={4} ml="auto" mr="auto" templateColumns="repeat(2,1fr)" w="60%">

@@ -187,18 +187,18 @@ const App: React.FC = () => {
 
   return (
     <Stack
+      _hover={{bg: "brand.600"}}
       bg="brand.500"
       boxShadow="md"
       direction="column"
       h="700px"
       m="auto"
-      width="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      _hover={{bg: "brand.600"}}
+      width="480px"
     >
       <Box color="white" m="auto" mt="50px" p={1} w="20%">
         <Text fontSize="xl">{time - 3}</Text>
-        <Progress value={33 - time} max={30} size="xs" color="brand.500" />
+        <Progress color="brand.500" max={30} size="xs" value={33 - time} />
       </Box>
       <QuestionCard
         footer={`${question.category} - ${question.difficulty}`}
@@ -206,26 +206,26 @@ const App: React.FC = () => {
       >
         {`${htmlDecode(question.question)}`}
       </QuestionCard>
-      <Grid m={2} h="240px">
+      <Grid h="240px" m={2}>
         {[...question.incorrect_answers, question.correct_answer]
           .sort((a, b) => a.localeCompare(b))
           .map((answer) => (
             <Button
+              key={answer}
               _hover={{
                 bg: "whiteAlpha.400",
                 boxShadow: "md",
                 color: "white",
               }}
-              key={answer}
               bg="white"
               color="brand.500"
               m="auto"
+              maxWidth="100%"
               mb={2}
               mt={2}
-              maxWidth="100%"
               onClick={() => onAnswer(answer)}
             >
-              <Text maxWidth="100%" whiteSpace="nowrap" overflow="hidden">
+              <Text maxWidth="100%" overflow="hidden" whiteSpace="nowrap">
                 {htmlDecode(answer)}
               </Text>
             </Button>
