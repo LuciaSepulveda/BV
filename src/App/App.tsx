@@ -198,7 +198,7 @@ const App: React.FC = () => {
     >
       <Box color="white" m="auto" mt="50px" p={1} w="20%">
         <Text fontSize="xl">{time - 3}</Text>
-        <Progress color="brand.500" max={30} size="xs" value={33 - time} />
+        <Progress colorScheme="pink" max={30} size="xs" value={33 - time} />
       </Box>
       <QuestionCard
         footer={`${question.category} - ${question.difficulty}`}
