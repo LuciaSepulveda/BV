@@ -1,6 +1,5 @@
 import {Box, Center, Flex, Grid, Text, Button} from "@chakra-ui/react"
 import * as React from "react"
-import styles from "./SelectCategory.module.scss"
 
 interface Props {
   selectCategory: (cat: string) => void

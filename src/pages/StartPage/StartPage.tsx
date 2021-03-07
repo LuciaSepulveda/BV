@@ -1,6 +1,5 @@
 import {Button, Center, Text} from "@chakra-ui/react"
 import * as React from "react"
-import styles from "./StartPage.module.scss"
 
 interface startPage {
   startGame: () => void
