@@ -15,7 +15,7 @@ const CorrectAnswer: React.FC<Props> = ({src}) => {
       templateColumns="repeat(1,1fr)"
       width="480px"
     >
-      <Img alt={"correct answer"} m="auto" src={src} w="40%" />
+      <Img alt={"correct answer"} m="auto" src={src} w="30%" />
       <Text color="white" fontSize="4xl">
         The answer was correct!
       </Text>
