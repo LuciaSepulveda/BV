@@ -1,47 +1,21 @@
 import * as React from "react"
-import {useState} from "react"
-import styles from "./App.module.scss"
+import {Box, Grid, Button, Stack, Text, Progress} from "@chakra-ui/react"
+
 import QuestionCard from "../components/QuestionCard/QuestionCard"
-import Button from "../ui/Button/Button"
 import StartPage from "../pages/StartPage/StartPage"
 import EndPage from "../pages/EndPage/EndPage"
 import CorrectAnswer from "../pages/CorrectAnswer/CorrectAnswer"
 import IncorrectAnswer from "../pages/IncorrectAnswer/IncorrectAnswer"
 import SelectCategory from "../pages/SelectCategory/SelectCategory"
-import {Question} from "../components/Question"
-import api from "../components/api"
+import {Question} from "../types/Question"
+import api from "../api/api"
 import correct from "../assets/correct.png"
 import incorrect from "../assets/incorrect.png"
-import {htmlDecode} from "../decode/htmlDecode"
-import Canvas from "../canvas/Canvas"
-
-enum Status {
-  Init = "init",
-  Pending = "pending",
-  Resolved = "resolved",
-  Rejected = "rejected",
-}
-
-enum GameStatus {
-  Init = "init",
-  Playing = "playing",
-  Finish = "finish",
-}
-
-enum Answer {
-  Empty = "",
-  Correct = "correct",
-  Incorrect = "incorrect",
-}
-
-enum Category {
-  Sports = 21,
-  Geography = 22,
-  History = 23,
-  Animals = 27,
-  EntertainmentMusic = 12,
-  General = 9,
-}
+import {htmlDecode} from "../types/htmlDecode"
+import {Status} from "../types/Status"
+import {GameStatus} from "../types/GameStatus"
+import {Answer} from "../types/Answer"
+import Loading from "../pages/Loading/Loading"
 
 const App: React.FC = () => {
   const [questions, setQuestions] = React.useState<Question[]>([])
@@ -50,7 +24,7 @@ const App: React.FC = () => {
   const [points, setPoints] = React.useState<number>(0)
   const [start, setStart] = React.useState<boolean>(false)
   const [gameStatus, setGameStatus] = React.useState<GameStatus>(GameStatus.Init)
-  const [time, setTime] = React.useState<number>(30)
+  const [time, setTime] = React.useState<number>(33)
   const [answerUser, setAnswerUser] = React.useState<string>("")
   const [answer, setAnswer] = React.useState<Answer>(Answer.Empty)
   const [electionCategory, setElectionCategory] = React.useState<boolean>(false)
@@ -72,12 +46,14 @@ const App: React.FC = () => {
 
       return
     }
-    const interval = setInterval(() => {
-      setTime((time) => time - 1)
-    }, 1000)
+    if (gameStatus === GameStatus.Playing && electionCategory === true) {
+      const interval = setInterval(() => {
+        setTime((time) => time - 1)
+      }, 1000)
 
-    return () => clearInterval(interval)
-  }, [time, start])
+      return () => clearInterval(interval)
+    }
+  }, [time, start, electionCategory, gameStatus])
 
   React.useEffect(() => {
     if (time <= 3 && answerUser === question.correct_answer) {
@@ -94,7 +70,7 @@ const App: React.FC = () => {
   const handleNextQuestion = () => {
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1)
-      setTime(30)
+      setTime(33)
     } else {
       setGameStatus(GameStatus.Finish)
     }
@@ -123,7 +99,6 @@ const App: React.FC = () => {
       setQuestions(question)
       setStatus(Status.Resolved)
       setElectionCategory(true)
-      console.log("Se configuro la api")
     })
   }
 
@@ -155,98 +130,35 @@ const App: React.FC = () => {
     configApi(n)
   }
 
+  const startGame = () => {
+    setGameStatus(GameStatus.Playing)
+    setStart(true)
+  }
+
   if (answer === Answer.Correct) {
-    return (
-      <CorrectAnswer>
-        <img src={correct} alt={"correct answer"} />
-        <h3>The answer was correct!</h3>
-      </CorrectAnswer>
-    )
+    return <CorrectAnswer src={correct} />
   }
 
   if (answer === Answer.Incorrect) {
-    return (
-      <IncorrectAnswer>
-        <img src={incorrect} alt={"incorrect answer"} />
-        <h3>The answer was incorrect.</h3>
-        <p>The right answer was: {question.correct_answer}</p>
-      </IncorrectAnswer>
-    )
+    return <IncorrectAnswer correct_answer={question.correct_answer} src={incorrect} />
   }
 
   if (status === Status.Pending) {
-    console.log("Pendiente")
-
-    return <span>Loading..</span>
+    return <Loading />
   }
 
   if (gameStatus === GameStatus.Init) {
     return (
       <StartPage
         startGame={() => {
-          setGameStatus(GameStatus.Playing)
-          setStart(true)
+          startGame()
         }}
       />
     )
   }
 
   if (gameStatus === GameStatus.Playing && electionCategory === false) {
-    return (
-      <SelectCategory>
-        <Button
-          onClick={() => {
-            selectCategory("sports")
-          }}
-        >
-          Sports
-        </Button>
-        <Button
-          onClick={() => {
-            selectCategory("geography")
-          }}
-        >
-          Geography
-        </Button>
-        <Button
-          onClick={() => {
-            selectCategory("history")
-          }}
-        >
-          History
-        </Button>
-        <Button
-          onClick={() => {
-            selectCategory("animals")
-          }}
-        >
-          Animals
-        </Button>
-        <Button
-          onClick={() => {
-            selectCategory("music")
-          }}
-        >
-          Music
-        </Button>
-        <Button
-          onClick={() => {
-            selectCategory("general")
-          }}
-        >
-          General
-        </Button>
-      </SelectCategory>
-    )
-  }
-
-  if (gameStatus === GameStatus.Playing && electionCategory === true) {
-    ;<StartPage
-      startGame={() => {
-        setGameStatus(GameStatus.Playing)
-        setStart(true)
-      }}
-    />
+    return <SelectCategory selectCategory={selectCategory} />
   }
 
   if (gameStatus === GameStatus.Finish) {
@@ -255,10 +167,11 @@ const App: React.FC = () => {
         playAgain={() => {
           setGameStatus(GameStatus.Init)
           setStatus(Status.Init)
-          setTime(30)
+          setTime(33)
           setCurrentQuestion(0)
           setStart(false)
           setPoints(0)
+          setElectionCategory(false)
         }}
         points={points}
       />
@@ -266,26 +179,52 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.time}>
-        <text>{time}</text>
-      </div>
+    <Stack
+      bg="brand.500"
+      boxShadow="md"
+      direction="column"
+      h="700px"
+      m="auto"
+      width="480px"
+      transition="1s cubic-bezier(.08,.5,.5,1)"
+      _hover={{bg: "brand.600"}}
+    >
+      <Box color="white" m="auto" mt="50px" p={1} w="20%">
+        <Text fontSize="xl">{time - 3}</Text>
+        <Progress value={33 - time} max={30} size="xs" color="brand.500" />
+      </Box>
       <QuestionCard
-        header={`${currentQuestion + 1}/${questions.length}`}
         footer={`${question.category} - ${question.difficulty}`}
+        header={`${currentQuestion + 1}/${questions.length}`}
       >
         {`${htmlDecode(question.question)}`}
       </QuestionCard>
-      <nav className={styles.answers}>
+      <Grid m={2} h="240px">
         {[...question.incorrect_answers, question.correct_answer]
           .sort((a, b) => a.localeCompare(b))
           .map((answer) => (
-            <Button key={answer} onClick={() => onAnswer(answer)}>
-              {htmlDecode(answer)}
+            <Button
+              _hover={{
+                bg: "whiteAlpha.400",
+                boxShadow: "md",
+                color: "white",
+              }}
+              key={answer}
+              bg="white"
+              color="brand.500"
+              m="auto"
+              mb={2}
+              mt={2}
+              maxWidth="100%"
+              onClick={() => onAnswer(answer)}
+            >
+              <Text maxWidth="100%" whiteSpace="nowrap" overflow="hidden">
+                {htmlDecode(answer)}
+              </Text>
             </Button>
           ))}
-      </nav>
-    </div>
+      </Grid>
+    </Stack>
   )
 }
 

@@ -1,3 +1,4 @@
+import {Button, Center, Text} from "@chakra-ui/react"
 import * as React from "react"
 import styles from "./StartPage.module.scss"
 
@@ -7,11 +8,31 @@ interface startPage {
 
 const StartPage: React.FC<startPage> = ({startGame}) => {
   return (
-    <div className={styles.container}>
-      <button className={styles.button} onClick={() => startGame()}>
-        Comenzar
-      </button>
-    </div>
+    <Center
+      alignItems="center"
+      bg="brand.500"
+      boxShadow="md"
+      h="700px"
+      m="auto"
+      width="480px"
+      transition="1s cubic-bezier(.08,.5,.5,1)"
+      _hover={{bg: "brand.600"}}
+    >
+      <Button
+        m="auto"
+        bg="white"
+        color="var(--secondary)"
+        onClick={() => startGame()}
+        _hover={{
+          bg: "black",
+          boxShadow: "md",
+          color: "white",
+        }}
+        p={10}
+      >
+        <Text fontSize="5xl">Start</Text>
+      </Button>
+    </Center>
   )
 }
 

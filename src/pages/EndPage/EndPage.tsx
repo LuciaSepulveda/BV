@@ -1,5 +1,5 @@
+import {Stack, Button, Text} from "@chakra-ui/react"
 import * as React from "react"
-import styles from "./EndPage.module.scss"
 
 interface endPage {
   playAgain: () => void
@@ -8,12 +8,34 @@ interface endPage {
 
 const EndPage: React.FC<endPage> = ({playAgain, points}) => {
   return (
-    <div className={styles.container}>
-      <button className={styles.button} onClick={() => playAgain()}>
-        Play again
-      </button>
-      <div className={styles.points}>Puntos: {points}</div>
-    </div>
+    <Stack
+      _hover={{bg: "brand.600"}}
+      alignItems="center"
+      bg="brand.500"
+      boxShadow="md"
+      h="700px"
+      justify="center"
+      m="auto"
+      transition="1s cubic-bezier(.08,.5,.5,1)"
+      width="480px"
+    >
+      <Button
+        _hover={{
+          bg: "black",
+          boxShadow: "md",
+          color: "white",
+        }}
+        bg="white"
+        color="var(--secondary)"
+        p={10}
+        onClick={() => playAgain()}
+      >
+        <Text fontSize="4xl">Play again</Text>
+      </Button>
+      <Text color="white" fontSize="3xl" padding={6}>
+        Points: {points}
+      </Text>
+    </Stack>
   )
 }
 

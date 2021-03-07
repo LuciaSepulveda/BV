@@ -1,38 +1,13 @@
+import {Box, Center, Flex, Grid, Text, Button} from "@chakra-ui/react"
 import * as React from "react"
-import Button from "../../ui/Button/Button"
 import styles from "./SelectCategory.module.scss"
-/*
-const SelectCategory: React.FC = () =>
-{
-    return(
-        <div className={styles.container}>
-            <h2>Select Category</h2>
-            <div className={styles.grid_container}>
-              <button className={styles.category} id="sports">Sports</button>
-              <button className={styles.category} id="geography">Geography</button>
-              <button className={styles.category} id="history">History</button>
-              <button className={styles.category} id="animals">Animals</button>
-              <button className={styles.category} id="music">Music</button>
-              <button className={styles.category} id="general">General</button>
-            </div>
-        </div>
-    )
-}
-*/
-
-/*
 
 interface Props {
-    start: () => void,
+  selectCategory: (cat: string) => void
 }
-*/
 
-const SelectCategory: React.FC = ({children}) => {
+const SelectCategory: React.FC<Props> = ({selectCategory, children}) => {
   const [category, setCategory] = React.useState<string>("hola")
-
-  function returnCategory() {
-    return category
-  }
 
   /*
     return(
@@ -50,10 +25,105 @@ const SelectCategory: React.FC = ({children}) => {
     )
     */
   return (
+    /*
     <div className={styles.container}>
       <h2>Select category</h2>
       <div className={styles.grid_container}>{children}</div>
-    </div>
+    </div>*/
+    <Flex
+      bg="brand.500"
+      direction="column"
+      h="700px"
+      justify="center"
+      m="auto"
+      w="480px"
+      _hover={{bg: "brand.600"}}
+      transition="1s cubic-bezier(.08,.5,.5,1)"
+    >
+      <Text color="white" fontSize="4xl" p={8} fontWeight="bold">
+        Select category
+      </Text>
+      <Grid gap={4} ml="auto" mr="auto" templateColumns="repeat(2,1fr)" w="60%">
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("sports")}
+        >
+          Sports
+        </Button>
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("geography")}
+        >
+          Geography
+        </Button>
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("history")}
+        >
+          History
+        </Button>
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("animals")}
+        >
+          Animals
+        </Button>
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("music")}
+        >
+          Music
+        </Button>
+        <Button
+          _hover={{
+            bg: "whiteAlpha.400",
+            boxShadow: "md",
+            color: "white",
+          }}
+          bg="white"
+          color="brand.500"
+          m="auto"
+          onClick={() => selectCategory("general")}
+        >
+          General
+        </Button>
+      </Grid>
+    </Flex>
   )
 }
 
