@@ -21,6 +21,7 @@ const App: React.FC = () => {
   const [questions, setQuestions] = React.useState<Question[]>([])
   const [currentQuestion, setCurrentQuestion] = React.useState<number>(0)
   const [status, setStatus] = React.useState<Status>(Status.Init)
+  const [totalPoints, setTotalPoints] = React.useState<number>(0)
   const [points, setPoints] = React.useState<number>(0)
   const [start, setStart] = React.useState<boolean>(false)
   const [gameStatus, setGameStatus] = React.useState<GameStatus>(GameStatus.Init)
@@ -77,16 +78,20 @@ const App: React.FC = () => {
   }
 
   const onAnswer = (text: string) => {
-    if (question.correct_answer === text) {
-      switch (question.type) {
-        case "boolean": {
+    switch (question.type) {
+      case "boolean": {
+        if (question.correct_answer === text) {
           setPoints((points) => points + 5)
-          break
         }
-        case "multiple": {
+        setTotalPoints((totalPoints) => totalPoints + 5)
+        break
+      }
+      case "multiple": {
+        if (question.correct_answer === text) {
           setPoints((points) => points + 10)
-          break
         }
+        setTotalPoints((totalPoints) => totalPoints + 10)
+        break
       }
     }
     setTime(2)
@@ -171,9 +176,11 @@ const App: React.FC = () => {
           setCurrentQuestion(0)
           setStart(false)
           setPoints(0)
+          setTotalPoints(0)
           setElectionCategory(false)
         }}
         points={points}
+        totalPoints={totalPoints}
       />
     )
   }

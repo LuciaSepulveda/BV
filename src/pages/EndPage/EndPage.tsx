@@ -4,9 +4,10 @@ import * as React from "react"
 interface endPage {
   playAgain: () => void
   points: number
+  totalPoints: number
 }
 
-const EndPage: React.FC<endPage> = ({playAgain, points}) => {
+const EndPage: React.FC<endPage> = ({playAgain, points, totalPoints}) => {
   return (
     <Stack
       _hover={{bg: "brand.600"}}
@@ -33,7 +34,7 @@ const EndPage: React.FC<endPage> = ({playAgain, points}) => {
         <Text fontSize="4xl">Play again</Text>
       </Button>
       <Text color="white" fontSize="3xl" padding={6}>
-        Points: {points}
+        Points: {points} / {totalPoints}
       </Text>
     </Stack>
   )
