@@ -29,6 +29,7 @@ const EndPage: React.FC<endPage> = ({playAgain, points, totalPoints}) => {
         bg="white"
         color="var(--secondary)"
         p={10}
+        transition="1s cubic-bezier(.08,.5,.5,1)"
         onClick={() => playAgain()}
       >
         <Text fontSize="4xl">Play again</Text>

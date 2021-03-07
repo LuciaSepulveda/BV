@@ -223,6 +223,7 @@ const App: React.FC = () => {
               maxWidth="100%"
               mb={2}
               mt={2}
+              transition="1s cubic-bezier(.08,.5,.5,1)"
               onClick={() => onAnswer(answer)}
             >
               <Text maxWidth="100%" overflow="hidden" whiteSpace="nowrap">

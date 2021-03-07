@@ -27,6 +27,7 @@ const StartPage: React.FC<startPage> = ({startGame}) => {
         color="var(--secondary)"
         m="auto"
         p={10}
+        transition="1s cubic-bezier(.08,.5,.5,1)"
         onClick={() => startGame()}
       >
         <Text fontSize="5xl">Start</Text>
