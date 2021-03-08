@@ -16,7 +16,7 @@ const IncorrectAnswer: React.FC<Props> = ({src, correct_answer}) => {
       templateColumns="repeat(1,1fr)"
       width="480px"
     >
-      <Img alt={"incorrect answer"} m="auto" src={src} w="30%" />
+      <Img alt={"incorrect answer"} m="auto" mb="0px" src={src} w="20%" />
       <Text color="white" fontSize="4xl">
         The answer was incorrect.
       </Text>

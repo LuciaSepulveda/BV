@@ -197,7 +197,7 @@ const App: React.FC = () => {
       width="480px"
     >
       <Box color="white" m="auto" mt="50px" p={1} w="20%">
-        <Text fontSize="xl">{time - 3}</Text>
+        <Text fontSize="2xl">{time - 3}</Text>
         <Progress colorScheme="pink" max={30} size="xs" value={33 - time} />
       </Box>
       <QuestionCard
