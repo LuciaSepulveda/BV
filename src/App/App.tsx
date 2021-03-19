@@ -7,14 +7,11 @@ import EndPage from "../pages/EndPage/EndPage"
 import CorrectAnswer from "../pages/CorrectAnswer/CorrectAnswer"
 import IncorrectAnswer from "../pages/IncorrectAnswer/IncorrectAnswer"
 import SelectCategory from "../pages/SelectCategory/SelectCategory"
-import {Question} from "../types/Question"
 import api from "../api/api"
 import correct from "../assets/correct.png"
 import incorrect from "../assets/incorrect.png"
 import {htmlDecode} from "../types/htmlDecode"
-import {Status} from "../types/Status"
-import {GameStatus} from "../types/GameStatus"
-import {Answer} from "../types/Answer"
+import {Status, GameStatus, Answer, Question, arrayCategories, Category} from "../types/types"
 import Loading from "../pages/Loading/Loading"
 
 const App: React.FC = () => {
@@ -29,6 +26,7 @@ const App: React.FC = () => {
   const [answerUser, setAnswerUser] = React.useState<string>("")
   const [answer, setAnswer] = React.useState<Answer>(Answer.Empty)
   const [electionCategory, setElectionCategory] = React.useState<boolean>(false)
+  const [categories, setCategories] = React.useState<Category[]>([])
 
   const question: Question = questions[currentQuestion]
 
@@ -107,32 +105,18 @@ const App: React.FC = () => {
     })
   }
 
-  const selectCategory = (text: string) => {
-    let n: number
+  const randomCategories = () => {
+    while (categories.length !== 6) {
+      const aux = arrayCategories[Math.round(Math.random() * 23) % arrayCategories.length]
 
-    switch (text) {
-      case "sports":
-        n = 21
-        break
-      case "geography":
-        n = 22
-        break
-      case "history":
-        n = 23
-        break
-      case "animals":
-        n = 27
-        break
-      case "music":
-        n = 12
-        break
-      case "general":
-        n = 9
-        break
-      default:
-        n = -1
+      if (!categories.includes(aux)) {
+        categories.push(aux)
+      }
     }
-    configApi(n)
+  }
+
+  const selectCategory = (cat: number) => {
+    configApi(cat)
   }
 
   const startGame = () => {
@@ -163,7 +147,9 @@ const App: React.FC = () => {
   }
 
   if (gameStatus === GameStatus.Playing && electionCategory === false) {
-    return <SelectCategory selectCategory={selectCategory} />
+    randomCategories()
+
+    return <SelectCategory categories={categories} selectCategory={selectCategory} />
   }
 
   if (gameStatus === GameStatus.Finish) {
@@ -189,12 +175,13 @@ const App: React.FC = () => {
     <Stack
       _hover={{bg: "brand.600"}}
       bg="brand.500"
-      boxShadow="md"
+      boxShadow="xl"
       direction="column"
       h="700px"
       m="auto"
+      maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      width="480px"
+      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
     >
       <Box color="white" m="auto" mt="50px" p={1} w="20%">
         <Text fontSize="2xl">{time - 3}</Text>

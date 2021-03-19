@@ -9,7 +9,7 @@ interface Props {
 const QuestionCard: React.FC<Props> = ({header, footer, children}) => {
   return (
     <Grid gap="2" h="200px" m="auto" p={2} templateColumns="repeat(1,1fr)" width="100%">
-      <Box bg="white" borderRadius={2} boxShadow="xl" m="auto" mt="-200px" p={2}>
+      <Box bg="white" borderRadius={10} m="auto" mt="-200px" p={2}>
         {header}
       </Box>
       <Center

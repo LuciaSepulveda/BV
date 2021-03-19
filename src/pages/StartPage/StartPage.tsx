@@ -11,11 +11,12 @@ const StartPage: React.FC<startPage> = ({startGame}) => {
       _hover={{bg: "brand.600"}}
       alignItems="center"
       bg="brand.500"
-      boxShadow="md"
+      boxShadow="xl"
       h="700px"
       m="auto"
+      maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      width="480px"
+      width={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
     >
       <Button
         _hover={{
@@ -25,7 +26,7 @@ const StartPage: React.FC<startPage> = ({startGame}) => {
         }}
         bg="white"
         color="var(--secondary)"
-        m="auto"
+        m={{sm: "10%"}}
         p={10}
         transition="1s cubic-bezier(.08,.5,.5,1)"
         onClick={() => startGame()}

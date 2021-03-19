@@ -10,11 +10,12 @@ const IncorrectAnswer: React.FC<Props> = ({src, correct_answer}) => {
   return (
     <Grid
       bg="brand.500"
-      boxShadow="md"
+      boxShadow="xl"
       h="700px"
       m="auto"
+      maxWidth="480px"
       templateColumns="repeat(1,1fr)"
-      width="480px"
+      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
     >
       <Img alt={"incorrect answer"} m="auto" mb="0px" src={src} w="20%" />
       <Text color="white" fontSize="4xl">

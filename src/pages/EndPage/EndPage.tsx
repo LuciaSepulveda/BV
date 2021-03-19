@@ -13,12 +13,13 @@ const EndPage: React.FC<endPage> = ({playAgain, points, totalPoints}) => {
       _hover={{bg: "brand.600"}}
       alignItems="center"
       bg="brand.500"
-      boxShadow="md"
+      boxShadow="xl"
       h="700px"
       justify="center"
       m="auto"
+      maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      width="480px"
+      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
     >
       <Button
         _hover={{
