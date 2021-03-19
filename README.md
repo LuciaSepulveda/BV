@@ -28,3 +28,8 @@ siguiente manera:
 * Todos los datos necesarios para el juego, están en [la siguiente API](https://opentdb.com/api.php?amount=10)
 * El juego puede realizarse en React web o React Native.
 * Cada pregunta debe presentarse en una pantalla distinta de la aplicación.
+
+## Extras
+* Se agregó la opción de elegir la categoria entre 6 categorias random.
+* En caso de seleccionar una opción incorrecta se muestra cuál era la correcta.
+* Hay 30 segundos para responder cada pregunta, si no se selecciona una opción la pregunta figura como incorrecta y se pasa a la siguiente.
