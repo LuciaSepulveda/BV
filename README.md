@@ -32,4 +32,4 @@ siguiente manera:
 ## Extras
 * Se agregó la opción de elegir la categoria entre 6 categorias random.
 * En caso de seleccionar una opción incorrecta se muestra cuál era la correcta.
-* Hay 30 segundos para responder cada pregunta, si no se selecciona una opción la pregunta figura como incorrecta y se pasa a la siguiente.
+* Hay 30 segundos para responder cada pregunta, si no se selecciona una opción la pregunta se cuenta como incorrecta y se pasa a la siguiente.
