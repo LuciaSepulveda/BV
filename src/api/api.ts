@@ -1,6 +1,6 @@
 import * as React from "react"
 
-import {Question} from "../types/Question"
+import {Question} from "../types/types"
 
 export default {
   list: (n: number): Promise<Question[]> =>
