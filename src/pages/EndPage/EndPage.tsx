@@ -19,7 +19,7 @@ const EndPage: React.FC<endPage> = ({playAgain, points, totalPoints}) => {
       m="auto"
       maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
+      w="90%"
     >
       <Button
         _hover={{

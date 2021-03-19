@@ -16,7 +16,7 @@ const StartPage: React.FC<startPage> = ({startGame}) => {
       m="auto"
       maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      width={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
+      w="90%"
     >
       <Button
         _hover={{

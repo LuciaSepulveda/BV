@@ -19,7 +19,7 @@ const SelectCategory: React.FC<Props> = ({selectCategory, categories}) => {
       m="auto"
       maxWidth="480px"
       transition="1s cubic-bezier(.08,.5,.5,1)"
-      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
+      w="90%"
     >
       <Text color="white" fontSize="4xl" fontWeight="bold" p={8}>
         Select category

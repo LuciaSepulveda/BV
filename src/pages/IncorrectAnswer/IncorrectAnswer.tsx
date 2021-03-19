@@ -15,7 +15,7 @@ const IncorrectAnswer: React.FC<Props> = ({src, correct_answer}) => {
       m="auto"
       maxWidth="480px"
       templateColumns="repeat(1,1fr)"
-      w={{sm: "80%", md: "480px", lg: "480px", xl: "480px"}}
+      w="90%"
     >
       <Img alt={"incorrect answer"} m="auto" mb="0px" src={src} w="20%" />
       <Text color="white" fontSize="4xl">
